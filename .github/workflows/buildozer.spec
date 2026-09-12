@@ -1,16 +1,19 @@
-[app]
-title = Cryptava
-package.name = cryptava
-package.domain = org.cryptava
-source.include_exts = py,png,jpg,kv,atlas
-version = 0.1
-requirements = python3,kivy
-orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 1.9.1
-fullscreen = 0
-android.api = 33
-android.minapi = 21
-android.sdk = 20
-android.ndk = 25b
-android.accept_sdk_license = True
+name: Build Android APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build with Buildozer
+        uses: kivy/buildozer-action@master
+        id: buildozer
+        with:
+          command: buildozer -v android debug
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: bin/*.apk
