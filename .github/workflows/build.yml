@@ -16,27 +16,46 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
+          sudo dpkg --add-architecture i386
           sudo apt-get update
           sudo apt-get install -y \
-            python3-pip \
             build-essential \
             git \
+            ffmpeg \
+            libsdl2-dev \
+            libsdl2-image-dev \
+            libsdl2-mixer-dev \
+            libsdl2-ttf-dev \
+            libportmidi-dev \
+            libswscale-dev \
+            libavformat-dev \
+            libavcodec-dev \
+            zlib1g-dev \
+            libunwind-dev \
+            libsqlite3-dev \
+            sqlite3 \
+            libbz2-dev \
+            libssl-dev \
+            openssl \
+            libffi-dev \
+            libltdl-dev \
+            libtool \
+            automake \
+            autoconf \
+            patch \
+            make \
             zip \
             unzip \
-            autoconf \
-            libtool \
-            pkg-config \
-            zlib1g-dev \
-            libncurses-dev \
-            libffi-dev \
-            libssl-dev \
-            default-jdk
+            wget \
+            curl \
+            openjdk-17-jdk
 
       - name: Install Buildozer and Cython
         run: |
           pip install --upgrade pip
+          pip install --upgrade setuptools
           pip install cython==0.29.36 buildozer
 
       - name: Build with Buildozer
