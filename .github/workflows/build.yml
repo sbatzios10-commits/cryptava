@@ -31,7 +31,8 @@ jobs:
             zlib1g-dev \
             libncurses-dev \
             libffi-dev \
-            libssl-dev
+            libssl-dev \
+            default-jdk
 
       - name: Install Buildozer and Cython
         run: |
